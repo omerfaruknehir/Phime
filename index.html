@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" content="width=device-width, initial-scale:0.5" />
+    <link rel="stylesheet" href="/public/stylesheet.css">
+    <script src="/public/jquery-3.5.0.js"></script>
+    <title>Phime</title>
+</head>
+
+<body>
+    <splash>
+        <img src="/public/icon.svg">
+    </splash>
+
+    <a class="fly" id="mobile" style="display: none;" href="/public/com.nocompany.phime.apk">Download Mobile App</a>
+    <a class="fly" id="desktop" style="display: none;" href="/public/Phime_1.0.0.0_x64.msix">Download Desktop App</a>
+
+    <div class="centered-div">
+        <h1 id="dateText">9 Nisan 2023</h1>
+        <p id="word"></p>
+        <p id="author"></p>
+    </div>
+
+    <div class="bottom-div" id="bottomDiv">
+        <input type="button" value="<" id="yesterday"
+            onclick="today = new Date(today-3600000*24); if (today-0 == 0) { this.disabled = true; } load();"
+            class="move-button">
+        <input type="date" value="today" min="01/01/1970"
+            onchange="today = this.valueAsDate; if (today-0 == 0) { document.getElementById('yesterday').disabled = ture; } else {document.getElementById('yesterday').disabled = false;} load();"
+            id="datepicker">
+        <input type="button" value=">"
+            onclick="today = new Date(today-3600000*-24); if (today-0 != 0) { document.getElementById('yesterday').disabled = false; } load();"
+            class="move-button">
+    </div>
+
+    <script>
+        function scf32(a, b, c, d) {
+            return function () {
+                a >>>= 0; b >>>= 0; c >>>= 0; d >>>= 0;
+                var t = (a + b) | 0;
+                a = b ^ b >>> 9;
+                a = c + (c << 3) | 0;
+                c = (c << 21 | c >>> 11);
+                d = d + 1 | 0;
+                t = t;
+            }
+        }
+
+        words = [];
+
+        $.getJSON("/public/words.json", function (data) {
+            words = data["words"];
+            load();
+        });
+        
+        function detectMobile(){
+            const toMatch = [
+                /Android/i,
+                /webOS/i,
+                /iPhone/i,
+                /iPad/i,
+                /iPod/i,
+                /blackberry/i,
+                /Windows Phone/i
+            ]
+
+            return toMatch.some((toMatchItem) => {
+                return navigator.userAgent.match(toMatchItem);
+            });
+        }
+
+        if (detectMobile()) {
+            document.getElementById("mobile").style.display = "block";
+        }
+        else{
+            document.getElementById("desktop").style.display = "block";
+        }
+
+        function getMonth() {
+            switch (today.getMonth()) {
+                case 0:
+                    return "Ocak";
+                case 1:
+                    return "Şubat";
+                case 2:
+                    return "Mart";
+                case 3:
+                    return "Nisan";
+                case 4:
+                    return "Mayıs";
+                case 5:
+                    return "Haziran";
+                case 6:
+                    return "Temmuz";
+                case 7:
+                    return "Ağustos";
+                case 8:
+                    return "Eylül";
+                case 9:
+                    return "Ekim";
+                case 10:
+                    return "Kasım";
+                case 11:
+                    return "Aralık";
+                default:
+                    break;
+            }
+        }
+
+        today = new Date();
+        function load() {
+            document.getElementById("datepicker").valueAsDate = today;
+            word = String(words[Math.floor(Math.floor(today / (3600000 * 24)) * 7 % words.length)]);
+            author = word.substr(word.lastIndexOf("("), word.length - word.lastIndexOf("("));
+            $("#word").text(word.substr(0, word.lastIndexOf("(")));
+            $("#author").text(author);
+            $("#dateText").text(today.getDate() + " " + getMonth() + " " + today.getFullYear());
+        }
+
+        setInterval(function () {
+            document.getElementById("bottomDiv").style.transform = "scale(" + Math.max(((window.innerHeight * 5) / (window.innerWidth * 7)), 1) + ")"
+        }, 10);
+    </script>
+</body>
+
+</html>

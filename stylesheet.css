@@ -1,0 +1,124 @@
+html {
+    background-color: rgb(0, 0, 0);
+    color: white;
+    color-scheme: dark;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+}
+
+splash {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0pt;
+    top: 0pt;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    opacity: 0;
+    transform: scale(0);
+    z-index: 1000;
+
+    -webkit-animation: ss 2s;
+    animation: ss 2s;
+}
+
+@keyframes ss {
+    0% {
+        opacity: 100;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 100;
+        transform: scale(1);
+        filter: blur(0pt) opacity(100);
+    }
+
+    90% {
+        opacity: 0;
+        transform: scale(2);
+        filter: blur(15pt) opacity(0);
+    }
+
+    100% {
+        opacity: 0;
+        filter: opacity(0);
+        transform: scale(0);
+    }
+}
+
+splash>img {
+    width: 30%;
+    height: 30vw;
+    position: absolute;
+    left: calc(50% - 15%);
+    top: calc(50% - 15vw);
+}
+
+input[type="date"] {
+    border: 0pt;
+    border-radius: 4pt;
+
+    height: 20pt;
+    padding: 10pt;
+}
+
+.bottom-div {
+    width: 100%;
+    height: auto;
+    padding-bottom: 5%;
+    position: fixed;
+    bottom: 0pt;
+    left: 0pt;
+    text-align: center;
+}
+
+input[type="button"] {
+    border: 0pt;
+    border-radius: 4pt;
+
+    height: 40pt;
+    padding: 15pt;
+    padding-top: 10pt;
+    margin: 20pt;
+
+    background-color: rgb(0, 190, 190);
+    color: black;
+    font-weight: 100;
+    font-size: large;
+}
+
+input[type="button"]:disabled{
+    background-color: rgb(60, 60, 60);
+}
+
+.centered-div {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 10%;
+    text-align: center;
+}
+
+#word {
+    font-size: large;
+}
+
+#author {
+    width: 100%;
+    text-align: end;
+    font-size: small;
+}
+
+.fly{
+    position: fixed;
+    display: block;
+    left: 10pt;
+    top: 10pt;
+    height: 20pt;
+    color: white;
+    text-decoration: none;
+    padding: 10pt;
+    background-color: rgb(50, 50, 50);
+    border: 0px;
+    border-radius: 8px;
+}
