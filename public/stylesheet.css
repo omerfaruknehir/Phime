@@ -128,18 +128,20 @@ input[type="button"]:disabled {
         font-size: xx-large;
     }
 
+    *{
+        font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
     #author {
         font-size: x-large;
     }
 
-    h1 {
-        font-size: 60px;
+    .centered-div {
+        margin-top: calc(10% + 40px);
     }
 
-    .fly {
-        height: 40px;
-        font-size: 30px;
-        border-radius: 10px;
+    h1 {
+        font-size: 60px;
     }
 
     input[type="button"] {
@@ -149,6 +151,12 @@ input[type="button"]:disabled {
         font-size: 40px;
         font-weight: 900;
         border-radius: 15px;
+    }
+
+    .fly {
+        height: 35px;
+        font-size: 30px;
+        border-radius: 10px;
     }
 
     input[type="date"] {
